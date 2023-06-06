@@ -1,0 +1,251 @@
+---
+title: "AOL"
+author: "Daksa"
+date: "May 24, 2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#url <- "https://raw.githubusercontent.com/rdzxc77/AOL/main/auto-mpg.csv"
+#destfile <-  "/cloud/project/aol 1/auto.csv"
+#download.file(url, destfile)
+#data <- read.csv(destfile)
+
+data <- read.csv("auto-mpg.csv")
+```
+
+```{r}
+library(ggplot2)
+library(tidyverse)
+library(caret)
+library(MASS)
+library(dplyr)
+library(psych)
+library(nortest)
+library(gplots)
+library(DataExplorer)
+library(lmtest)
+library(mvnormtest)
+library(lawstat)
+```
+
+```{r}
+data<-data[data$horsepower!="?",]
+
+autompg<-data.frame(cylinders=data$cylinders,
+                     displacement=as.numeric(data$displacement),
+                     horsepower=as.numeric(data$horsepower),
+                     weight=as.numeric(data$weight),
+                     acceleration=as.numeric(data$acceleration),
+                     model.year=data$model.year,
+                     origin=data$origin,
+                     mpg=as.numeric(data$mpg))
+```
+
+```{r}
+str(autompg)
+```
+```{r}
+describe(autompg)
+```
+```{r}
+summary(autompg)
+```
+
+
+```{r}
+colSums(is.na(data))
+
+plot_missing(data)
+```
+#_Penjelasan_
+1. Tidak terdapat missing value dalam dataset ini, tetapi setelah di telusuri lebih dalam terdapat variabel yang bernilai '?' yang dimana kita harus menghapus '?' tersebut.
+
+```{r}
+library(corrplot)
+
+corrplot(cor(autompg))
+```
+
+\#**Penjelasan** 
+1. Disini kita ingin melihat variabel yang paling berkorelasi negatif dan positif, contohnya adalah semakin besar Cylinder maka semakin besar juga Displacement, Horse Power dan Weight. Lalu semakin besar Cylinder, Displacement, Horse Power dan Weight makan semakin kecil Mpg, yang dapat diartikan semakin boros mobil tersebut.  
+
+```{r}
+par(mfrow = c(2, 2))
+hist(as.numeric(autompg$cylinders))
+hist(autompg$displacement)
+hist(autompg$horsepower)
+hist(autompg$weight)
+```
+
+#_Penjelasan_
+1. Disini kita melihat grafik dari variabel Cylinder, Displacement, Horse Power dan Weight.
+
+```{r}
+par(mfrow = c(2, 2))
+hist(autompg$acceleration)
+hist(as.numeric(autompg$model.year))
+hist(as.numeric(autompg$origin))
+hist(autompg$mpg)
+```
+#Penjelasan
+1. Disini kita melihat grafik dari variabel Acceleration, Model Year, Origin dan Mpg
+2. Dari kesimpulan grafik dari semua variabel diatas dapat dilihat bahwa Acceleration dan Mpg memiliki distribusi yang hampir normal sedangkan seperti Horse Power dam Weight sedikit terlalu ke kiri, Yang menandakan bahwa akan ada beberapa mobil yang memiliki Horse Power yang besar dan Beban yang berat
+
+
+
+```{r}
+#Mengecek Outlier
+boxplot(autompg$mpg, main = "Mpg Outlier by Boxplot")
+boxplot(autompg$cylinders, main = "Cylinders Outlier by Boxplot")
+boxplot(autompg$displacement, main = "Displacement Outlier by Boxplot")
+boxplot(autompg$weight, main = "Weight Outlier by Boxplot")
+boxplot(autompg$acceleration, main = "Acceleration Outlier by Boxplot")
+boxplot(autompg$model.year, main = "Model Year Outlier by Boxplot")
+```
+#Penjelasan 
+1. Penggunaan dan visualisasi Outlier menggunakan Boxplot. Dan dapat dilihat bahwa terdapat Outlier pada Variabel Acceleration.
+
+```{r}
+lmMod <- lm(mpg~cylinders+displacement+weight+acceleration+model.year, data=autompg) 
+summary(lmMod)
+
+plot(lmMod,2)
+plot(lmMod,3)
+```
+
+#_Penjelasan_
+1. Kami akan membuat model linier sederhana. kami akan fokus pada lima variabel yang paling berkorelasi negatif atau positif dengan variabel target kami, yaitu : 
+-Cylinders
+-Displacement
+-Horse_power
+-Weight
+-Model_year
+
+```{r}
+#write your code here
+library(ggpubr)
+
+ggplot(data=data, aes(x=mpg, y=weight)) +
+        geom_smooth(method="lm") +
+        geom_point() +
+        stat_regline_equation(label.x=20, label.y=5500)
+```
+
+```{r}
+fit1=lm(autompg$mpg~as.numeric(autompg$cylinders))
+summary(fit1)
+
+plot(autompg$mpg~as.numeric(autompg$cylinders))
+abline(fit1,col="red") 
+```
+```{r}
+fit2=lm(autompg$mpg~autompg$displacement)
+summary(fit2)
+
+plot(autompg$mpg~autompg$displacement)
+abline(fit2,col="red") 
+```
+```{r}
+fit3=lm(autompg$mpg~autompg$horsepower)
+summary(fit3)
+
+plot(autompg$mpg~autompg$horsepower)
+abline(fit3,col="red") 
+```
+```{r}
+fit4=lm(autompg$mpg~autompg$weight)
+summary(fit4)
+
+plot(autompg$mpg~autompg$weight)
+abline(fit4,col="red") 
+```
+```{r}
+fit5=lm(autompg$mpg~as.numeric(autompg$model.year))
+summary(fit5)
+
+plot(autompg$mpg~as.numeric(autompg$model.year))
+abline(fit5,col="red")
+```
+#_Penjelasan_
+Dari 5 kali tes tersebut kami akan memilih model fit 4 yang dimana akan digunakan untuk menghitung target Mpg dengan Weight dan mendapatkan hasil nilai R-squared:  0.6918. Tetapi kita akan mencoba juga dengan model non linear untuk melihat apakah lebih cocok dengan model linear atau non linear. Kita akan menggunakan Variabel Displacement, Horse power, Weight.
+
+```{r}
+fit6<-lm(autompg$mpg~autompg$weight+I(autompg$weight^2))
+summary(fit6)
+
+plot(autompg$mpg~autompg$weight) + 
+points(autompg$weight,fitted(fit6),col="red",pch=20) +
+stat_regline_equation(label.x=2000, label.y=40)
+```
+```{r}
+fit7<-lm(autompg$mpg~autompg$displacement+I(autompg$displacement^2))
+summary(fit7)
+
+plot(autompg$mpg~autompg$displacement)
+points(autompg$displacement,fitted(fit7),col="red",pch=20)
+```
+```{r}
+fit8<-lm(autompg$mpg~autompg$horsepower+I(autompg$horsepower^2))
+summary(fit8)
+
+plot(autompg$mpg~autompg$horsepower)
+points(autompg$horsepower,fitted(fit8),col="red",pch=20)
+```
+#_Penjelasan_
+1. Dapat dilihat bahwa ternyata model non linear sangat cocok dan kami menemukan hasil yang lebih baik pada variabel Weight dengan nilai R-squared:  0.7137. Tetapi kita akan mencoba lagi untuk mendapatkan nilai R-squared yang lebih baik dengan melakukan Multiple Linear Regression 
+
+```{r}
+fit9<-lm(log(mpg)~.,data=autompg)
+summary(fit9)
+```
+#_Penjelasan_
+1. Pertama kita mencoba dengan menggabungkan semua variabel untuk di test dan kita dapat melihat peningkatan yang sangat signifikan dibanding model yang pertama kali kita buat yaitu dengan nilai R-squared:  0.8773
+yang menunjukan prediksi model tersebut adalah 88% akurasi pada variabel yang kita pilih atau artinya benar bahwa semakin besar horse power, cylinders, displacement, weight, acceleration makan semakin kecil mpg (semakin boros mobil tersebut)
+
+
+```{r}
+library(caret)
+set.seed(1)
+validation1 = createDataPartition(autompg$mpg, p=0.8, list = FALSE)
+validationset = data[validation1,]
+trainingset = data[validation1,]
+
+validationset$horsepower <- as.numeric(validationset$horsepower)
+print(str(validationset$horsepower))
+```
+
+```{r}
+prediction <- predict(fit9, validationset)
+```
+
+
+```{r}
+validationset$predicted <- predict(fit9, validationset)
+prediction1 <- data.frame(validationset$mpg, validationset$predicted, validationset$mpg - validationset$predicted)
+names(prediction1) <- c ("MEDV", "Predicted", "residuals")
+correlation <- cor(prediction1)
+correlation
+```
+#_Penjelasan_
+Model diatas sudah bagus dan tidak overfitted atau underfitted karena hanya ada 3 data point yang sedikit jauh dari garis regresi 
+lalu model diatas juga sudah bagus karena dengan mengambil variabel mpg dan 5 variabel lain. kita dapat menemukan korelasi yang kuat bahkan korelasi yang bagus dengan melihat std eror yang kecil dan p value yang kecil di banding variabel yang lain
+setelah kita buat model prediksi model tersebut menunjukan 90% akurasi 
+
+```{r}
+plot(exp(prediction), validationset$mpg, xlab="predicted mpg", ylab="Actual mpg", col="blue")
+abline(a=0,b=1)
+```
+#_Penjelasan_
+Untuk model diatas akan saya publish walaupun sudah bagus tapi masih membutuhkan eksplorasi lebih dalam untuk memvalidasi model tersebut untuk menyempurnakan modelnya
+
+
+
+
+
+
+

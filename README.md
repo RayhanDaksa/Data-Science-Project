@@ -7,7 +7,7 @@
 [Investigate Hotel Business using Data Visualization.](https://github.com/RayhanDaksa/Data-Science-Project/tree/main/Investigate%20Hotel%20Business%20using%20Data%20Visualization)
 - Analyzed hotel business performance and customer behavior using data visualization to identify key insights.
 
-[Predict Customer Personality to Boost Marketing Campaign by Using Machine Learning.]()
+[Predict Customer Personality to Boost Marketing Campaign by Using Machine Learning.](https://github.com/RayhanDaksa/Data-Science-Project/tree/main/Predict%20Customer%20Personality%20to%20Boost%20Marketing%20Campaign%20by%20Using%20Machine%20Learning)
 - Predicted customer personality using machine learning to boost marketing campaigns.
 
 [Predict Customer Clicked Ads Classification by Using Machine Learning.]([https://github.com/RayhanDaksa/Data-Science-Project/tree/main/Predict%20Customer%20Clicked%20Ads%20Classification%20by%20Using%20Machine%20Learning)

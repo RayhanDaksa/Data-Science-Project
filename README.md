@@ -13,7 +13,7 @@
 [Predict Customer Clicked Ads Classification by Using Machine Learning.]([https://github.com/RayhanDaksa/Data-Science-Project/tree/main/Predict%20Customer%20Clicked%20Ads%20Classification%20by%20Using%20Machine%20Learning)
 - Increased the accuracy of customer clicked ads classification by 15% using machine learning.
 
-[Improving Employee Retention by Predicting Employee Attrition Using Machine Learning.]([https://github.com/RayhanDaksa/Data-Science-Project/tree/main/Improving%20Employee%20Retention%20by%20Predicting%20Employee%20Attrition%20Using%20Machine%20Learning)
+[Improving Employee Retention by Predicting Employee Attrition Using Machine Learning.](https://github.com/RayhanDaksa/Data-Science-Project/tree/main/Improving%20Employee%20Retention%20by%20Predicting%20Employee%20Attrition%20Using%20Machine%20Learning)
 - Analyzed employee data to identify key insights and developed a machine learning model to predict employee attrition.
 
 [Potential Customer Prediction using Machine Leaarning.](https://github.com/RayhanDaksa/Data-Science-Project/tree/main/Potential%20Customer%20Prediction%20using%20Machine%20Leaarning)

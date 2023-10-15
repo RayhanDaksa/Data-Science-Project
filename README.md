@@ -10,8 +10,8 @@
 [Predict Customer Personality to Boost Marketing Campaign by Using Machine Learning.](https://github.com/RayhanDaksa/Data-Science-Project/tree/main/Predict%20Customer%20Personality%20to%20Boost%20Marketing%20Campaign%20by%20Using%20Machine%20Learning)
 - Predicted customer personality using machine learning to boost marketing campaigns.
 
-[Predict Customer Clicked Ads Classification by Using Machine Learning.]([https://github.com/RayhanDaksa/Data-Science-Project/tree/main/Predict%20Customer%20Clicked%20Ads%20Classification%20by%20Using%20Machine%20Learning)
-- Increased the accuracy of customer clicked ads classification by 15% using machine learning.
+[Predict Customer Clicked Ads Classification by Using Machine Learning.](https://github.com/RayhanDaksa/Data-Science-Project/tree/main/Predict%20Customer%20Clicked%20Ads%20Classification%20by%20Using%20Machine%20Learning)
+- Increased the accuracy of customer clicked ads classification using machine learning.
 
 [Improving Employee Retention by Predicting Employee Attrition Using Machine Learning.](https://github.com/RayhanDaksa/Data-Science-Project/tree/main/Improving%20Employee%20Retention%20by%20Predicting%20Employee%20Attrition%20Using%20Machine%20Learning)
 - Analyzed employee data to identify key insights and developed a machine learning model to predict employee attrition.

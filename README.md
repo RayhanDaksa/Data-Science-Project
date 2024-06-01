@@ -1,5 +1,5 @@
 # Curriculum Vitae
-[Rayhan Prawira Daksa - Currivilum Vitae.](https://drive.google.com/file/d/1hO8cbJfYxFTLfWXg6uioc32LtERB7mzg/view?usp=sharing)
+[Rayhan Prawira Daksa - Currivilum Vitae.](https://drive.google.com/file/d/1g7QAUlq-Il9uIN20cvFnLiipuNJ5pCqn/view?usp=drive_link)
 
 
 # Data-Science-Project
